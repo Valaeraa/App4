@@ -13,24 +13,24 @@ using Microsoft.AspNetCore.Http;
 
 namespace App4.WebUI.Controllers
 {
-    public class UsersController : Controller
+    public class LeaderboardController : Controller
     {
-        private readonly IUsersEndpoint _usersEndpoint;
+        private readonly ILeaderboardEndpoint _leaderboardEndpoint;
 
-        public UsersController(IUsersEndpoint usersEndpoint)
+        public LeaderboardController(ILeaderboardEndpoint leaderboardEndpoint)
         {
-            _usersEndpoint = usersEndpoint;
+            _leaderboardEndpoint = leaderboardEndpoint;
         }
 
-        // GET: Users
+        // GET: Leaderboard
         public async Task<IActionResult> Index()
         {
-            var users = await _usersEndpoint.GetAll();
+            var leaderboards = await _leaderboardEndpoint.GetAll();
 
-            return View(users.ToList());
+            return View(leaderboards.ToList());
         }
 
-        // GET: Users/Details/1
+        // GET: Leaderboard/Details/1
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,37 +38,37 @@ namespace App4.WebUI.Controllers
                 return NotFound();
             }
 
-            var user = await _usersEndpoint.GetById(id.Value);
+            var leaderboard = await _leaderboardEndpoint.GetById(id.Value);
 
-            if (user == null)
+            if (leaderboard == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(leaderboard);
         }
 
-        // GET: Users/Create
+        // GET: Leaderboard/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Leaderboard/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Email,Telephone")] UserModel user)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Score,GamesPlayed")] LeaderboardModel leaderboard)
         {
             if (ModelState.IsValid)
             {
-                await _usersEndpoint.Create(user);
+                await _leaderboardEndpoint.Create(leaderboard);
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(leaderboard);
         }
 
-        // GET: Users/Edit/1
+        // GET: Leaderboard/Edit/1
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,22 +76,21 @@ namespace App4.WebUI.Controllers
                 return NotFound();
             }
 
-            var user = await _usersEndpoint.GetById(id.Value);
-
-            if (user == null)
+            var leaderboard = await _leaderboardEndpoint.GetById(id.Value);
+            
+            if (leaderboard == null)
             {
                 return NotFound();
             }
-
-            return View(user);
+            return View(leaderboard);
         }
 
-        // POST: Users/Edit/1
+        // POST: Leaderboard/Edit/1
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Email,Telephone")] UserModel user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Score,GamesPlayed")] LeaderboardModel leaderboard)
         {
-            if (id != user.Id)
+            if (id != leaderboard.Id)
             {
                 return NotFound();
             }
@@ -100,11 +99,11 @@ namespace App4.WebUI.Controllers
             {
                 try
                 {
-                    await _usersEndpoint.Update(id, user);
+                    await _leaderboardEndpoint.Update(id, leaderboard);
                 }
                 catch (Exception ex)
                 {
-                    if (await UserExists(user.Id) == false)
+                    if (await LeaderboardExists(leaderboard.Id) == false)
                     {
                         return NotFound();
                     }
@@ -115,14 +114,14 @@ namespace App4.WebUI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(leaderboard);
         }
 
-        private async Task<bool> UserExists(int id)
+        private async Task<bool> LeaderboardExists(int id)
         {
-            var users = await _usersEndpoint.GetAll();
+            var leaderboards = await _leaderboardEndpoint.GetAll();
 
-            return users.Any(e => e.Id == id);
+            return leaderboards.Any(e => e.Id == id);
         }
     }
 }
