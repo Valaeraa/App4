@@ -3,14 +3,16 @@ using App4.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace App4.Data.Migrations
 {
     [DbContext(typeof(App4Context))]
-    partial class App4ContextModelSnapshot : ModelSnapshot
+    [Migration("20200811201407_AddLeaderboard")]
+    partial class AddLeaderboard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
