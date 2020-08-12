@@ -10,6 +10,7 @@ namespace App4.WebUI.Api
 {
     public class UsersEndpoint : IUsersEndpoint
     {
+        private const string _requestUri = "api/Users";
         private readonly IAPIHelper _apiHelper;
 
         public UsersEndpoint(IAPIHelper apiHelper)
@@ -19,7 +20,7 @@ namespace App4.WebUI.Api
 
         public async Task Create(UserModel user)
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("api/Users", user))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync(_requestUri, user))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -34,7 +35,7 @@ namespace App4.WebUI.Api
 
         public async Task<IEnumerable<UserModel>> GetAll()
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("api/Users"))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync(_requestUri))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -51,7 +52,7 @@ namespace App4.WebUI.Api
 
         public async Task<UserModel> GetById(int id)
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"api/Users/{id}"))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"{_requestUri}/{id}"))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -68,7 +69,7 @@ namespace App4.WebUI.Api
 
         public async Task Update(int id, UserModel user)
         {
-            using (HttpResponseMessage response = await _apiHelper.ApiClient.PutAsJsonAsync($"api/Users/{id}", user))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PutAsJsonAsync($"{_requestUri}/{id}", user))
             {
                 if (response.IsSuccessStatusCode)
                 {
