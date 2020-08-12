@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App4.Data;
 using App4.WebUI.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +29,8 @@ namespace App4.WebUI
             services.AddControllersWithViews();
 
             services.AddSingleton<IAPIHelper, APIHelper>();
+            services.AddScoped<ILeaderboardEndpoint, LeaderboardEndpoint>();
+            services.AddScoped<IUsersEndpoint, UsersEndpoint>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
