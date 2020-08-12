@@ -10,6 +10,7 @@ using App4.Data.Entities;
 using App4.WebUI.Api;
 using App4.WebUI.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App4.WebUI.Controllers
 {
@@ -56,6 +57,7 @@ namespace App4.WebUI.Controllers
 
         // POST: Leaderboard/Create
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserId,Score,GamesPlayed")] LeaderboardModel leaderboard)
         {
@@ -87,6 +89,7 @@ namespace App4.WebUI.Controllers
 
         // POST: Leaderboard/Edit/1
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Score,GamesPlayed")] LeaderboardModel leaderboard)
         {
