@@ -2,7 +2,51 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid text-center">
+    <h2>Welcome</h2>
+    <p>
+        App4 is a web app that tracks all the games you've played.
+        There's a leaderboard that displays all the users and the number 
+        of games they had played or add new users to the leaderboard.
+    </p>
+</div>
+
+<div class="container-fluid mt-md-5">
+
+    <div class="container text-center">
+        <h2>Project Setup</h2>
+        <p>Follow these instructions to make sure the project is configured correctly.</p>
+    </div>
+
+    <div class="card-deck mt-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Set the App4.API and the App4.WebUI to start together</h5>
+                <p class="card-text">
+                    Right-click on the solution and go to the properties then select Startup Project and select Multiple startup projects.
+                    Select App4.API and set its action to start and do the same for App4.WebUI.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Make sure ApiKey matches App URL</h5>
+                <p class="card-text">
+                    Make sure that the App4.WebUI ApiKey matches the App URL of the App4.API project. You can check the App URL of the App4.API project by right-clicking the App4.API project and selecting properties than going into the debug section.
+                    In the App4.WebUI appsettings.json file you can see the ApiKey and check to see if it matches the App URL of the App4.API project.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">EF Core Migration</h5>
+                <p class="card-text">
+                    Make sure you update the database of the App4.Data and the App4.WebUI by using the
+                    Package Manager Console and typing in the command Update-Database.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
