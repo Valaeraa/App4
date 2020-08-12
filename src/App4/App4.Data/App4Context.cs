@@ -1,4 +1,4 @@
-﻿using App4.Data.Models;
+﻿using App4.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,5 +19,6 @@ namespace App4.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Leaderboard> Leaderboards { get; set; }
     }
 }
