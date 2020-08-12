@@ -7,6 +7,7 @@ namespace App4.WebUI.Models
 {
     public class LeaderboardModel
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public int Score { get; set; }
         public int GamesPlayed { get; set; }
