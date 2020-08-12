@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using App4.Data;
-using App4.Data.Models;
+using App4.Data.Entities;
 
 namespace App4.API.Controllers
 {
