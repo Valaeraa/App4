@@ -11,16 +11,19 @@ using App4.WebUI.Api;
 using App4.WebUI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using App4.WebUI.ViewModels;
 
 namespace App4.WebUI.Controllers
 {
     public class LeaderboardController : Controller
     {
         private readonly ILeaderboardEndpoint _leaderboardEndpoint;
+        private readonly IUsersEndpoint _usersEndpoint;
 
-        public LeaderboardController(ILeaderboardEndpoint leaderboardEndpoint)
+        public LeaderboardController(ILeaderboardEndpoint leaderboardEndpoint, IUsersEndpoint usersEndpoint)
         {
             _leaderboardEndpoint = leaderboardEndpoint;
+            _usersEndpoint = usersEndpoint;
         }
 
         // GET: Leaderboard
@@ -50,9 +53,13 @@ namespace App4.WebUI.Controllers
         }
 
         // GET: Leaderboard/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var leaderboardVM = new LeaderboardViewModel();
+            leaderboardVM.Users = await _usersEndpoint.GetAll();
+            leaderboardVM.Users.ToList();
+
+            return View(leaderboardVM);
         }
 
         // POST: Leaderboard/Create

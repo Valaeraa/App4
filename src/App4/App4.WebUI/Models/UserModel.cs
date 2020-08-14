@@ -12,5 +12,8 @@ namespace App4.WebUI.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
+
+        public string FullName { get { return $"{FirstName} {LastName}"; } }
+
     }
 }
