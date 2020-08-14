@@ -16,7 +16,7 @@
                 <label asp-for="Leaderboard.UserId" class="control-label"></label>
                 <select asp-for="Leaderboard.UserId" class="form-control"
                         asp-items="@(new SelectList(Model.Users, "Id", "FullName"))">
-                    <option>Select User</option>
+                    <option value="">Select a User</option>
                 </select>
                 <span asp-validation-for="Leaderboard.UserId" class="text-danger"></span>
             </div>
